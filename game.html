@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kidofun: Color Match</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #fef8e4;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #ff6f61;
+      font-size: 3em;
+    }
+    .game-container {
+      margin-top: 30px;
+    }
+    .animal {
+      font-size: 100px;
+      margin-bottom: 20px;
+    }
+    .buttons button {
+      font-size: 1.5em;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+    }
+    .red { background-color: red; }
+    .green { background-color: green; }
+    .blue { background-color: blue; }
+    .grey { background-color: grey; }
+    .yellow { background-color: yellow; }
+    .orange { background-color: orange; }
+    .brown { background-color: brown; }
+    .pink { background-color: pink; }
+    .message {
+      font-size: 1.8em;
+      color: #4CAF50;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Kidofun: Color Match 🎨</h1>
+  <div class="game-container">
+    <div class="animal" id="animal">🐘</div>
+    <div class="buttons">
+      <button class="red" onclick="checkAnswer('red')">Red</button>
+      <button class="blue" onclick="checkAnswer('blue')">Blue</button>
+      <button class="green" onclick="checkAnswer('green')">Green</button>
+      <button class="grey" onclick="checkAnswer('grey')">Grey</button>
+      <button class="yellow" onclick="checkAnswer('yellow')">Yellow</button>
+      <button class="orange" onclick="checkAnswer('orange')">Orange</button>
+      <button class="brown" onclick="checkAnswer('brown')">Brown</button>
+      <button class="pink" onclick="checkAnswer('pink')">Pink</button>
+    </div>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const animals = [
+      { emoji: '🐘', color: 'grey' },
+      { emoji: '🐟', color: 'blue' },
+      { emoji: '🦁', color: 'yellow' },
+      { emoji: '🦄', color: 'pink' },
+      { emoji: '🐍', color: 'green' },
+      { emoji: '🦒', color: 'orange' },
+      { emoji: '🐯', color: 'orange' }, // Tiger (orange with black)
+      { emoji: '🦉', color: 'brown' },
+      { emoji: '🐻', color: 'brown' },
+      { emoji: '🐨', color: 'grey' } // Koala (grey)
+    ];
+
+    let current = 0;
+
+    function loadAnimal() {
+      const animalEl = document.getElementById('animal');
+      const message = document.getElementById('message');
+      const animal = animals[current];
+      animalEl.textContent = animal.emoji;
+      message.textContent = '';
+    }
+
+    function checkAnswer(color) {
+      const animal = animals[current];
+      const message = document.getElementById('message');
+      if (color === animal.color) {
+        message.textContent = '🎉 Correct! Great job!';
+        setTimeout(() => {
+          current = (current + 1) % animals.length;
+          loadAnimal();
+        }, 1500);
+      } else {
+        message.textContent = 'Oops! Try again.';
+      }
+    }
+
+    window.onload = loadAnimal;
+  </script>
+</body>
+</html>
